@@ -10,11 +10,27 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.5.0
+  flutter_native_splash: ^2.3.1
+  location:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  image_path: "assets/img/ola-icon.jpeg"
+  android: "launcher_icon"
+  ios: true
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/img/olaola.png
+  color_dark: "#FFFFFF"
+  android: true
+  ios: true
+
 flutter:
   uses-material-design: true
   assets:

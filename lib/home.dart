@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FaIcon(FontAwesomeIcons.church, size: myHeight*0.1,color: Colors.deepOrange,),
+                    FaIcon(FontAwesomeIcons.church, size: myHeight*0.075,color: Colors.deepOrange,),
                     Text("Kingsway International Christian Center,",
                       style: TextStyle(
                         fontSize: myHeight*0.02,
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),),
                     SizedBox(
                       height: myWidth * 0.03),
-                    FaIcon(FontAwesomeIcons.bowlRice, size: myHeight*0.1,color: Colors.deepOrange,),
+                    FaIcon(FontAwesomeIcons.bowlRice, size: myHeight*0.075,color: Colors.deepOrange,),
                     Text("13 Obadare Close, Santos Estate,",
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
