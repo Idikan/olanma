@@ -18,6 +18,204 @@ class MyChurchPage extends StatefulWidget {
 }
 
 class _MyChurchPageState extends State<MyChurchPage> {
+
+  Completer<GoogleMapController> _googleMapController = Completer();
+  CameraPosition? _cameraPosition;
+  Location? _location;
+  LocationData? _currentLocation;
+
+
+  List<LatLng> polylineCoordinates = [];
+  Map<PolylineId, Polyline> polyLines = {};
+  Iterable markers = [];
+
+  BitmapDescriptor destinationIcon =
+  BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
+  BitmapDescriptor sourceIcon =
+  BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet);
+  BitmapDescriptor currentLocationIcon = BitmapDescriptor.defaultMarker;
+
+  void setCustomMarkerIcon() {
+    BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(60, 80)),
+      "assets/img/ola.png",
+    ).then(
+          (icon) {
+        currentLocationIcon = icon;
+      },
+    );
+  }
+
+  _addPolyLine() {
+    PolylineId id = const PolylineId("poly");
+    Polyline polyline = Polyline(
+      width: 4,
+      polylineId: id,
+      color: const Color(0xFF3214EC),
+      points: polylineCoordinates,
+    );
+    polyLines[id] = polyline;
+  }
+
+  void getPolyPoints() async {
+    PolylinePoints polylinePoints = PolylinePoints();
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      "AIzaSyBAEbEyQHBYByW-",
+      PointLatLng(_currentLocation!.latitude!, _currentLocation!.longitude!),
+      const PointLatLng(6.5757235,3.3684964),
+      travelMode: TravelMode.driving,
+    );
+    if (result.points.isNotEmpty) {
+      for (var point in result.points) {
+        polylineCoordinates.add(
+          LatLng(point.latitude, point.longitude),
+        );
+      }
+      _addPolyLine();
+      setState(() {});
+    }
+  }
+
+
+
+
+  @override
+  void initState() {
+    _init().whenComplete(() =>
+        Future.delayed(const Duration(seconds: 5), (){
+          getPolyPoints();
+          //    setCustomMarkerIcon();
+        }));
+    super.initState();
+  }
+
+  Future _init() async {
+    _location = Location();
+    _cameraPosition = CameraPosition(
+        target: LatLng(_currentLocation?.latitude ?? 6.4385669,_currentLocation?.longitude ?? 3.4194777), // this is just the example lat and lng for initializing
+        zoom: 12
+    );
+    _initLocation();
+  }
+
+  //function to listen when we move position
+  _initLocation() {
+    //use this to go to current location instead
+    _location?.getLocation().then((location) {
+      setState(() {
+        _currentLocation = location;
+      });
+    });
+    _location?.onLocationChanged.listen((newLocation) {
+      setState(() {
+        _currentLocation = newLocation;
+      });
+      moveToPosition(LatLng(_currentLocation?.latitude ?? 0, _currentLocation?.longitude ?? 0));
+      //   getPolyPoints();
+    });
+  }
+
+  moveToPosition(LatLng latLng) async {
+    GoogleMapController mapController = await _googleMapController.future;
+    mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+            CameraPosition(
+                target: latLng,
+                zoom: 12
+            )
+        )
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Direction to KICC PrayerDome',
+          style: TextStyle(
+              fontSize: 17.sp,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF000000)),
+        ),
+      ),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return _getMap();
+  }
+
+  Widget _getMarker() {
+    return Container(
+      width: 40,
+      height: 40,
+      padding: const EdgeInsets.all(2),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(100),
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0,3),
+                spreadRadius: 4,
+                blurRadius: 6
+            )
+          ]
+      ),
+      child:  ClipOval(child: Image.asset("assets/img/olaola.png")),
+    );
+  }
+
+  Widget _getMap() {
+    return Stack(
+      children: [
+        GoogleMap(
+          initialCameraPosition: _cameraPosition!,
+          mapType: MapType.normal,
+          onMapCreated: (GoogleMapController controller) {
+            if (!_googleMapController.isCompleted) {
+              _googleMapController.complete(controller);
+            }
+          },
+
+          markers: {
+            Marker(
+              markerId: const MarkerId("source"),
+              icon: sourceIcon,
+              position:
+              LatLng(_currentLocation?.latitude ?? 0, _currentLocation?.longitude ?? 0),
+            ),
+            Marker(
+              markerId: const MarkerId("destination"),
+              icon: destinationIcon,
+              position: LatLng(6.5757235,3.3684964),
+            ),
+            /*Marker(
+              markerId: const MarkerId("currentLocation"),
+              icon: currentLocationIcon,
+              position: LatLng(
+                _currentLocation?.latitude ?? 0,
+                _currentLocation?.longitude ?? 0,
+              ),
+            ),*/
+          },
+          polylines: Set<Polyline>.of(polyLines.values),
+        ),
+
+        Positioned.fill(
+            child: Align(
+                alignment: Alignment.center,
+                child: _getMarker()
+            )
+        )
+      ],
+    );
+  }
+}
+
+/*{
   late GoogleMapController mapController;
   final Completer<GoogleMapController> _controller = Completer();
   final double _destLatitude = 6.5757235;
@@ -30,7 +228,7 @@ class _MyChurchPageState extends State<MyChurchPage> {
   Map<PolylineId, Polyline> polylines = {};
   List<LatLng> polylineCoordinates = [];
   PolylinePoints polylinePoints = PolylinePoints();
-  String googleAPiKey = apiKey;
+  String googleAPiKey = googleAPIKey;
 
   BitmapDescriptor destinationIcon =
       BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
@@ -82,7 +280,6 @@ class _MyChurchPageState extends State<MyChurchPage> {
 
   @override
   Widget build(BuildContext context) {
-//    double myWidth = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
         appBar: AppBar(
@@ -94,14 +291,14 @@ class _MyChurchPageState extends State<MyChurchPage> {
                 color: const Color(0xFF000000)),
           ),
         ),
-        body: /* currentLocation == null
+        body: *//* currentLocation == null
             ? const Center(
                 child: SizedBox(
                 width: 40,
                 height: 40,
                 child: CircularProgressIndicator(),
               ))
-            : */ GoogleMap(
+            : *//* GoogleMap(
                 initialCameraPosition: CameraPosition(
                     target: LatLng(widget.lat!, widget.long!), zoom: 11.8),
                 myLocationEnabled: true,
@@ -177,4 +374,4 @@ class _MyChurchPageState extends State<MyChurchPage> {
     );
     debugPrint("Error getting location: ");
   }
-}
+}*/
