@@ -212,16 +212,16 @@ class _MyReceptionPageState extends State<MyReceptionPage>  {
             left: 0,
             //   right: 0,
             bottom: 0,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 2.w),
-              margin: EdgeInsets.all(3.w),
-              color: Colors.deepOrange,
-              child: TextButton(
-                onPressed: () {
-                  polylineCoordinates = [];
-                  polyLines = {};
-                  getPolyPoints();
-                },
+            child: InkWell(
+              onTap: () {
+                polylineCoordinates = [];
+                polyLines = {};
+                getPolyPoints();
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                margin: EdgeInsets.all(3.w),
+                color: Colors.deepOrange,
                 child: Row(
                   children: [
                     FaIcon(FontAwesomeIcons.route, size: 6.w,color: Colors.white),
