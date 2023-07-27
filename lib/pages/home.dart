@@ -103,11 +103,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: 1.5.h,),
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Align(
@@ -132,117 +132,136 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       ),
                       SizedBox(height: 4.w),
-                      Row(
-                        children: [
-                          FaIcon(FontAwesomeIcons.church,size:4.h,color: Colors.white,),
-                     //     SizedBox(width: 3.w,),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
 
-                              Text("@ Kingsway Int'l Christian Center,",
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFFFFFFFF)
-                                ),),
+                      SizedBox(
+                        width: myWidth,
+                        child: Row(
+                          children: [
+                            FaIcon(FontAwesomeIcons.church,size:4.h,color: Colors.white,),
+                            Container(
+                              margin: EdgeInsets.only(left: 0.3.w),
+                              width: myWidth * 0.81,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
 
-                              Text("(KICC PrayerDome)",
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFFFFFFFF)
-                                ),),
-                              Text("#13 Oki Lane, Mende, Maryland - Lagos.",
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFFFFFFFF)
-                                ),),
-                            ],
-                          )
-                        ],
+                                  Text("@ Kingsway Int'l Christian Center,",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: const Color(0xFFFFFFFF)
+                                    ),),
+
+                                  Text("(KICC PrayerDome)",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: const Color(0xFFFFFFFF)
+                                    ),),
+                                  Text("#13 Oki Lane, Mende, Maryland - Lagos.",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: const Color(0xFFFFFFFF)
+                                    ),),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
 
                       //date and time
                       SizedBox(height: 1.w),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text("30th",
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFFFFFFFF)
-                                ),),
-                              Text("July, 2023",
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    color: const Color(0xFFFFFFFF)
-                                ),),
-                            ],
-                          ),
-                          Container(width:1.w, height:10.w, color:Colors.white,margin: EdgeInsets.symmetric(horizontal: 4.w),),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text("9AM",
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFFFFFFFF)
-                                ),),
-                              Text("PROMPT",
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    color: const Color(0xFFFFFFFF)
-                                ),),
-                            ],
-                          ),
-                        ],
+
+                      SizedBox(
+                        width: myWidth,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text("30th",
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFFFFFFFF)
+                                  ),),
+                                Text("July, 2023",
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color: const Color(0xFFFFFFFF)
+                                  ),),
+                              ],
+                            ),
+                            Container(width:1.w, height:10.w, color:Colors.white,margin: EdgeInsets.symmetric(horizontal: 4.w),),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text("9AM",
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFFFFFFFF)
+                                  ),),
+                                Text("PROMPT",
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color: const Color(0xFFFFFFFF)
+                                  ),),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
 
                       SizedBox(height: 4.w),
-                      Row(
-                        children: [
-                          FaIcon(FontAwesomeIcons.bowlRice,size:4.h, color: Colors.white,),
-                          SizedBox(width: 3.w,),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("13 Obadare Close, Santos Estate,",
-                                softWrap: true,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFFFFFFFF)
-                                ),),
-                              Text("Off Shasha Road - Lagos.",
-                                softWrap: true,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFFFFFFFF)
-                                ),),
-                            ],
-                          )
-                        ],
+                      SizedBox(
+                        width: myWidth,
+                        child: Row(
+                          children: [
+                            FaIcon(FontAwesomeIcons.bowlRice,size:4.h, color: Colors.white,),
+                            Container(
+                              margin: EdgeInsets.only(left: 2.3.w),
+                              width: myWidth * 0.81,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("13 Obadare Close, Santos Estate,",
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: const Color(0xFFFFFFFF)
+                                    ),),
+                                  Text("Off Shasha Road - Lagos.",
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: const Color(0xFFFFFFFF)
+                                    ),),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
 
                       SizedBox(height: 3.w),
                       Text("RSVP: 08032000329 | 07034638224",
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
-                          fontSize: 17.sp,
+                          fontSize: 16.sp,
                           color: const Color(0xFFFFFFFF),
                         ),),
 
@@ -256,7 +275,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 lat: _currentLocation!.latitude,
                                 long: _currentLocation!.longitude,
                             )))
-                            : null,
+                            : Get.snackbar("Retry", "Ooop your current location is not found, please click again",
+                            backgroundColor: Colors.white, colorText: Colors.black
+                            ),
                             child: Container(
                               width: myWidth * 0.45,
                               padding: EdgeInsets.symmetric(vertical: 3.w),
@@ -267,7 +288,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Center(
                                 child: Text("Direction to Church",
                                 style: TextStyle(color: Colors.white,
-                                    fontSize: 15.sp,
+                                    fontSize: 14.sp,
                                 fontWeight: FontWeight.w700),),
                               ),
                             ),
@@ -290,7 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Center(
                                 child: Text("Direction to Reception",
                                 style: TextStyle(color: Colors.white,
-                                    fontSize: 15.sp,
+                                    fontSize: 14.sp,
                                 fontWeight: FontWeight.w700),),
                               ),
                             ),

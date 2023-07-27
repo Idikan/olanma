@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../controllers/keys.dart';
 
 class MyChurchPage extends StatefulWidget {
   const MyChurchPage({Key? key, this.lat, this.long}) : super(key: key);
@@ -23,8 +23,7 @@ class _MyChurchPageState extends State<MyChurchPage> {
   CameraPosition? _cameraPosition;
   Location? _location;
   LocationData? _currentLocation;
-
-
+  StreamSubscription<LocationData>? _locationSubscription;
   List<LatLng> polylineCoordinates = [];
   Map<PolylineId, Polyline> polyLines = {};
   Iterable markers = [];
@@ -60,8 +59,8 @@ class _MyChurchPageState extends State<MyChurchPage> {
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "AIzaSyBAEbEyQHBYByW-",
-      PointLatLng(_currentLocation!.latitude!, _currentLocation!.longitude!),
+      "GOOGLE-API",
+      PointLatLng(_currentLocation!.latitude ?? widget.lat!, _currentLocation!.longitude ?? widget.long!),
       const PointLatLng(6.5757235,3.3684964),
       travelMode: TravelMode.driving,
     );
@@ -75,8 +74,6 @@ class _MyChurchPageState extends State<MyChurchPage> {
       setState(() {});
     }
   }
-
-
 
 
   @override
@@ -95,24 +92,29 @@ class _MyChurchPageState extends State<MyChurchPage> {
         target: LatLng(_currentLocation?.latitude ?? 6.4385669,_currentLocation?.longitude ?? 3.4194777), // this is just the example lat and lng for initializing
         zoom: 12
     );
-    _initLocation();
+    _startListening();
   }
 
-  //function to listen when we move position
-  _initLocation() {
-    //use this to go to current location instead
+
+  Future _startListening() async {
     _location?.getLocation().then((location) {
       setState(() {
         _currentLocation = location;
       });
     });
-    _location?.onLocationChanged.listen((newLocation) {
+
+    _locationSubscription = _location?.onLocationChanged.listen((locationData) {
       setState(() {
-        _currentLocation = newLocation;
+        _currentLocation = locationData;
       });
+
       moveToPosition(LatLng(_currentLocation?.latitude ?? 0, _currentLocation?.longitude ?? 0));
-      //   getPolyPoints();
     });
+
+  }
+
+  void _stopListening() {
+    _locationSubscription?.cancel();
   }
 
   moveToPosition(LatLng latLng) async {
@@ -127,10 +129,25 @@ class _MyChurchPageState extends State<MyChurchPage> {
     );
   }
 
+  /*void _stopListening() {
+    _location?.onLocationChanged.drain();
+    //_location.onLocationChanged.drain();
+  }*/
+
+  @override
+  void dispose() {
+    _stopListening();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: () {
+          _stopListening();
+          Navigator.pop(context);
+        }, icon: FaIcon(FontAwesomeIcons.arrowLeft)),
         title: Text(
           'Direction to KICC PrayerDome',
           style: TextStyle(
@@ -184,22 +201,13 @@ class _MyChurchPageState extends State<MyChurchPage> {
             Marker(
               markerId: const MarkerId("source"),
               icon: sourceIcon,
-              position:
-              LatLng(_currentLocation?.latitude ?? 0, _currentLocation?.longitude ?? 0),
+              position: LatLng(widget.lat!, widget.long!),
             ),
             Marker(
               markerId: const MarkerId("destination"),
               icon: destinationIcon,
-              position: LatLng(6.5757235,3.3684964),
+              position: const LatLng(6.5757235,3.3684964),
             ),
-            /*Marker(
-              markerId: const MarkerId("currentLocation"),
-              icon: currentLocationIcon,
-              position: LatLng(
-                _currentLocation?.latitude ?? 0,
-                _currentLocation?.longitude ?? 0,
-              ),
-            ),*/
           },
           polylines: Set<Polyline>.of(polyLines.values),
         ),
@@ -209,7 +217,33 @@ class _MyChurchPageState extends State<MyChurchPage> {
                 alignment: Alignment.center,
                 child: _getMarker()
             )
-        )
+        ),
+        Positioned(
+            left: 0,
+         //   right: 0,
+            bottom: 0,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
+              margin: EdgeInsets.all(3.w),
+              color: Colors.deepOrange,
+              child: TextButton(
+                onPressed: () {
+                  polylineCoordinates = [];
+                  polyLines = {};
+                  getPolyPoints();
+                  },
+                child: Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.route, size: 6.w,color: Colors.white),
+                    SizedBox(width: 3.w,),
+                    Text("Click to redraw polyline",
+                      style: TextStyle(color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w700),),
+                  ],
+                ),
+              ),
+            )),
       ],
     );
   }
@@ -291,7 +325,8 @@ class _MyChurchPageState extends State<MyChurchPage> {
                 color: const Color(0xFF000000)),
           ),
         ),
-        body: *//* currentLocation == null
+        body: */
+/* currentLocation == null
             ? const Center(
                 child: SizedBox(
                 width: 40,
