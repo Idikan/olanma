@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>759435018103-5bpdlqi6duqc8cfvld9vf31ijooocsi7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.759435018103-5bpdlqi6duqc8cfvld9vf31ijooocsi7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBbZ1NjifyTonETNQ-rFXOKWOxineZ9760</string>
+	<key>GCM_SENDER_ID</key>
+	<string>759435018103</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ng.com.idika.olanma</string>
+	<key>PROJECT_ID</key>
+	<string>olahealth-c5f47</string>
+	<key>STORAGE_BUCKET</key>
+	<string>olahealth-c5f47.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:759435018103:ios:809ada725ce500e4e02b72</string>
+</dict>
+</plist>

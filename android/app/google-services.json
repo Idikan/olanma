@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "759435018103",
+    "project_id": "olahealth-c5f47",
+    "storage_bucket": "olahealth-c5f47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759435018103:android:fec649e59968b119e02b72",
+        "android_client_info": {
+          "package_name": "ng.com.idika.olachat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759435018103-icijljphu0sc8hnkv61j7mjuimoje0rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHnIjxC9qYP4T_MT-CTbtOq7RCIwJdevk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759435018103-icijljphu0sc8hnkv61j7mjuimoje0rl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "759435018103-5bpdlqi6duqc8cfvld9vf31ijooocsi7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ng.com.idika.olanma"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759435018103:android:c988b26bbfdc6e47e02b72",
+        "android_client_info": {
+          "package_name": "ng.com.idika.olanma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759435018103-icijljphu0sc8hnkv61j7mjuimoje0rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHnIjxC9qYP4T_MT-CTbtOq7RCIwJdevk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759435018103-icijljphu0sc8hnkv61j7mjuimoje0rl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "759435018103-5bpdlqi6duqc8cfvld9vf31ijooocsi7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ng.com.idika.olanma"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

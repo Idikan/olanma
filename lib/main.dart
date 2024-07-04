@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:olanma/pages/my_church.dart';
 import 'package:olanma/pages/my_reception_page.dart';
+import 'package:olanma/screens/event_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'auth/screens/login_or_register.dart';
 import 'pages/home.dart';
 
 
@@ -23,9 +26,19 @@ void main() async{
 
   HttpOverrides.global = MyHttpOverrides();
 
- // await dotenv.load(fileName: ".env");
+  await Firebase.initializeApp();
 
-  runApp(const MyApp());
+
+    runApp( //const MyApp()
+
+    MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => EventProvider()),
+    ],
+    child: const MyApp(),
+  ),
+
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -44,7 +57,8 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         getPages: [
-          GetPage(name: '/', page: () => const MyHomePage()),
+          GetPage(name: '/', page: () => const LoginOrRegister()),
+       //   GetPage(name: '/', page: () => const MyHomePage()),
           GetPage(name: '/church', page: () => const MyChurchPage(),),
           GetPage(name: '/reception', page: () => const MyReceptionPage()),
         ],

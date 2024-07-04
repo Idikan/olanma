@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             FaIcon(FontAwesomeIcons.church,size:4.h,color: Colors.white,),
                             Container(
                               margin: EdgeInsets.only(left: 0.3.w),
-                              width: myWidth * 0.81,
+                              width: myWidth * 0.8,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -228,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             FaIcon(FontAwesomeIcons.bowlRice,size:4.h, color: Colors.white,),
                             Container(
                               margin: EdgeInsets.only(left: 2.3.w),
-                              width: myWidth * 0.81,
+                              width: myWidth * 0.8,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,7 +300,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                   lat: _currentLocation!.latitude,
                                   long: _currentLocation!.longitude,
                                 )))
-                                : null,
+                                :  Get.snackbar("Retry", "Ooop your current location is not found, please click again",
+                                backgroundColor: Colors.white, colorText: Colors.black
+                            ),
                             child: Container(
                               width: myWidth * 0.45,
                               padding: EdgeInsets.symmetric(vertical: 3.w),

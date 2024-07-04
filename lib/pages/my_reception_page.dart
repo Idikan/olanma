@@ -57,7 +57,7 @@ class _MyReceptionPageState extends State<MyReceptionPage>  {
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "GOOGLE-API",
+      "AIzaSyBAEbEyQHBYByW-hHn2gVkOj04lBN8D1js",
       PointLatLng(_currentLocation!.latitude!, _currentLocation!.longitude!),
       const PointLatLng(6.6018745,3.3093405),
       travelMode: TravelMode.driving,
@@ -87,8 +87,8 @@ class _MyReceptionPageState extends State<MyReceptionPage>  {
   Future _init() async {
     _location = Location();
     _cameraPosition = CameraPosition(
-        target: LatLng(_currentLocation?.latitude ?? 6.4385669,_currentLocation?.longitude ?? 3.4194777), // this is just the example lat and lng for initializing
-        zoom: 12
+        target: LatLng(_currentLocation?.latitude ?? 6.4385669,_currentLocation?.longitude ?? 3.4194777),
+        zoom: 14
     );
     _startListening();
   }
@@ -122,7 +122,7 @@ class _MyReceptionPageState extends State<MyReceptionPage>  {
         CameraUpdate.newCameraPosition(
             CameraPosition(
                 target: latLng,
-                zoom: 12
+                zoom: 14
             )
         )
     );
@@ -219,7 +219,7 @@ class _MyReceptionPageState extends State<MyReceptionPage>  {
                 getPolyPoints();
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                padding: EdgeInsets.all( 3.w),
                 margin: EdgeInsets.all(3.w),
                 color: Colors.deepOrange,
                 child: Row(
@@ -228,7 +228,7 @@ class _MyReceptionPageState extends State<MyReceptionPage>  {
                     SizedBox(width: 3.w,),
                     Text("Click to redraw polyline",
                       style: TextStyle(color: Colors.white,
-                          fontSize: 14.sp,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.w700),),
                   ],
                 ),

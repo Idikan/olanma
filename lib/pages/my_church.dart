@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -59,7 +57,7 @@ class _MyChurchPageState extends State<MyChurchPage> {
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "GOOGLE-API",
+      "AIzaSyBAEbEyQHBYByW-hHn2gVkOj04lBN8D1js",
       PointLatLng(_currentLocation!.latitude ?? widget.lat!, _currentLocation!.longitude ?? widget.long!),
       const PointLatLng(6.5757235,3.3684964),
       travelMode: TravelMode.driving,
@@ -90,7 +88,7 @@ class _MyChurchPageState extends State<MyChurchPage> {
     _location = Location();
     _cameraPosition = CameraPosition(
         target: LatLng(_currentLocation?.latitude ?? 6.4385669,_currentLocation?.longitude ?? 3.4194777), // this is just the example lat and lng for initializing
-        zoom: 12
+        zoom: 14
     );
     _startListening();
   }
@@ -123,16 +121,11 @@ class _MyChurchPageState extends State<MyChurchPage> {
         CameraUpdate.newCameraPosition(
             CameraPosition(
                 target: latLng,
-                zoom: 12
+                zoom: 14
             )
         )
     );
   }
-
-  /*void _stopListening() {
-    _location?.onLocationChanged.drain();
-    //_location.onLocationChanged.drain();
-  }*/
 
   @override
   void dispose() {
@@ -229,7 +222,7 @@ class _MyChurchPageState extends State<MyChurchPage> {
                 getPolyPoints();
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                padding: EdgeInsets.all( 3.w),
                 margin: EdgeInsets.all(3.w),
                 color: Colors.deepOrange,
                 child: Row(
@@ -238,7 +231,7 @@ class _MyChurchPageState extends State<MyChurchPage> {
                     SizedBox(width: 3.w,),
                     Text("Click to redraw polyline",
                       style: TextStyle(color: Colors.white,
-                          fontSize: 14.sp,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.w700),),
                   ],
                 ),
